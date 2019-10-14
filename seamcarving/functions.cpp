@@ -279,7 +279,7 @@ int energy(Pixel** image, int x, int y, int width, int height) {
 }
 
 // implement for part 2
-/*
+
 int loadVerticalSeam(Pixel** image, int start_col, int width, int height, int* seam) {
 	return 0;
 }
@@ -305,4 +305,3 @@ void removeVerticalSeam(Pixel** image, int width, int height, int* verticalSeam)
 void removeHorizontalSeam(Pixel** image, int width, int height, int* horizontalSeam) {
 
 }
-*/

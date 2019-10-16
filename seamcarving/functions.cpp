@@ -275,6 +275,7 @@ int energy(Pixel** image, int x, int y, int width, int height) {
 		int By = abs(image[x % width][(y + 1) % height].b - image[x % width][(y - 1) % height].b);
 		sumY = pow(Ry, 2) + pow(Gy, 2) + pow(By, 2);
 	}
+	cout << "Energy " << sumX + sumY << endl;//test
 	return (sumX + sumY);
 }
 
@@ -305,6 +306,8 @@ int loadVerticalSeam(Pixel** image, int start_col, int width, int height, int* s
 				minEnergyPos = seam[i - 1] + 1;
 			}
 		totalEnergy += minEnergy;
+		cout << "PIXEL ENERGY " << minEnergy << endl;//test
+		cout << "SEAM ENERGY " << totalEnergy << endl;//test
 		seam[i] = minEnergyPos;
 	}
 	return totalEnergy;
@@ -336,6 +339,8 @@ int loadHorizontalSeam(Pixel** image, int start_row, int width, int height, int*
 				minEnergyPos = seam[i - 1] + 1;
 			}
 		totalEnergy += minEnergy;
+		cout << "PIXEL ENERGY " << minEnergy << endl;//test
+		cout << "SEAM ENERGY " << totalEnergy << endl;//test
 		seam[i] = minEnergyPos;
 	}
 	return totalEnergy;

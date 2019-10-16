@@ -157,6 +157,14 @@
   <ItemGroup>
     <ClInclude Include="functions.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="blocks38X36.ppm" />
+    <None Include="Fishing1080X720.ppm" />
+    <None Include="Fishing175X117.ppm" />
+    <None Include="HJoceanSmall507X285.ppm" />
+    <None Include="sunset1080X673.ppm" />
+    <None Include="sunset200X125.ppm" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -198,8 +198,6 @@ bool outputImage(string filename, Pixel** image, int width, int height) {
 		}
 		ofs << endl;
 	}
-
-
 	return true;
 }
 
@@ -270,13 +268,14 @@ int energy(Pixel** image, int x, int y, int width, int height) {
 
 // implement for part 2
 int loadVerticalSeam(Pixel** image, int start_col, int width, int height, int* seam) {
-	long totalEnergy = 0;
+	int totalEnergy = 0;
 	int minEnergy = 2147483647;
 	int minEnergyPos = 0;
 	seam[0] = start_col;
 
 	for (int i = 1; i < height; i++)
 	{
+		minEnergy = 2147483647;
 		if (seam[i - 1] != 0)
 			if (energy(image, seam[i - 1] - 1, i, width, height) <= minEnergy)
 			{
@@ -294,46 +293,41 @@ int loadVerticalSeam(Pixel** image, int start_col, int width, int height, int* s
 			minEnergy = energy(image, seam[i - 1], i, width, height);
 			minEnergyPos = seam[i - 1];
 		}
-		
-		totalEnergy += minEnergy;
-//		cout << "PIXEL ENERGY " << minEnergy << endl;//test
-//		cout << "SEAM ENERGY " << totalEnergy << endl;//test
 		seam[i] = minEnergyPos;
-		minEnergy = 2147483647;
+		totalEnergy += minEnergy;
 	}
 	return totalEnergy;
 }
 
 int loadHorizontalSeam(Pixel** image, int start_row, int width, int height, int* seam) {
-	long totalEnergy = 0;
+	int totalEnergy = 0;
 	int minEnergy = 2147483647;
 	int minEnergyPos = 0;
 	seam[0] = start_row;
 
 	for (int i = 1; i < width; i++)
 	{
+		minEnergy = 2147483647;
 		if (seam[i - 1] != 0)
-			if (energy(image, i, seam[i - 1] - 1, width, height) < minEnergy)
+			if (energy(image, i, seam[i - 1] - 1, width, height) <= minEnergy)
 			{
 				minEnergy = energy(image, i, seam[i - 1] - 1, width, height);
 				minEnergyPos = seam[i - 1] - 1;
+			}
+		if (seam[i - 1] != height - 1)
+			if (energy(image, i, seam[i - 1] + 1, width, height) <= minEnergy)
+			{
+				minEnergy = energy(image, i, seam[i - 1] + 1, width, height);
+				minEnergyPos = seam[i - 1] + 1;
 			}
 		if (energy(image, i, seam[i - 1], width, height) <= minEnergy)
 		{
 			minEnergy = energy(image, i, seam[i - 1], width, height);
 			minEnergyPos = seam[i - 1];
 		}
-		if (seam[i - 1] != height - 1)
-			if (energy(image, i, seam[i - 1] + 1, width, height) < minEnergy)
-			{
-				minEnergy = energy(image, i, seam[i - 1] + 1, width, height);
-				minEnergyPos = seam[i - 1] + 1;
-			}
+		
 		totalEnergy += minEnergy;
-//		cout << "PIXEL ENERGY " << minEnergy << endl;//test
-//		cout << "SEAM ENERGY " << totalEnergy << endl;//test
 		seam[i] = minEnergyPos;
-		minEnergy = 2147483647;
 	}
 	return totalEnergy;
 }
@@ -353,7 +347,6 @@ int* findMinVerticalSeam(Pixel** image, int width, int height) {
 		}
 	}
 	loadVerticalSeam(image, minStartCol, width, height, seam);
-	cout << "Found Min Vertical Seam" << endl;
 	return seam;
 }
 
@@ -372,20 +365,25 @@ int* findMinHorizontalSeam(Pixel** image, int width, int height) {
 		}
 	}
 	loadHorizontalSeam(image, minStartRow, width, height, seam);
-	cout << "Found Min Horizontal Seam" << endl;
 	return seam;
 }
 
 void removeVerticalSeam(Pixel** image, int width, int height, int* verticalSeam) {
-	cout << "Removing Vertical Seam" << endl;
 	for (int j = 0; j < height; j++)
+	{
 		for (int i = verticalSeam[j]; i < width - 1; i++)
-			image[j][i] = image[j][i + 1];
+		{
+			image[i][j] = image[i + 1][j];
+		}
+	}
 }
 
 void removeHorizontalSeam(Pixel** image, int width, int height, int* horizontalSeam) {
-	cout << "Removing Horizontal Seam" << endl;
 	for (int i = 0; i < width; i++)
+	{
 		for (int j = horizontalSeam[i]; j < height - 1; j++)
-			image[j][i] = image[j + 1][i];
+		{
+			image[i][j] = image[i][j + 1];
+		}
+	}
 }

@@ -65,12 +65,12 @@ int main() {
 		cout << "Error: target height must be greater than 0. You entered " << targetHeight << endl;
 		return 0;
 	}
-	if (targetWidth >= width)
+	if (targetWidth > width)
 	{
 		cout << "Error: target width must be less than width, " << targetWidth << " is greater than " << width << endl;
 		return 0;
 	}
-	if (targetHeight >= height)
+	if (targetHeight > height)
 	{
 		cout << "Error: target height must be less than height, " << targetHeight << " is greater than " << height << endl;
 		return 0;

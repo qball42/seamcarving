@@ -93,6 +93,7 @@ int main() {
 					seam = findMinVerticalSeam(image, width, height);
 					removeVerticalSeam(image, width, height, seam);
 					width--;
+					deleteSeam(seam);
 				}
 				if (height > targetHeight)
 				{
@@ -100,6 +101,7 @@ int main() {
 					seam = findMinHorizontalSeam(image, width, height);
 					removeHorizontalSeam(image, width, height, seam);
 					height--;
+					deleteSeam(seam);
 				}
 				
 			}
@@ -112,6 +114,10 @@ int main() {
 		// call last to remove the memory from the heap
 		deleteImage(image, originalWidth);
 	}
-	// else 
+	else
+	{
+
+	}
+	return 0;
   
 }

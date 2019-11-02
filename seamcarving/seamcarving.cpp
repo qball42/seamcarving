@@ -85,26 +85,25 @@ int main() {
 		{
 			cout << "Start carving..." << endl;
 			// Add code to remove seams from image (Do in part 2)
+
+			int* seam = createSeam(width);
 			while (width > targetWidth || height > targetHeight)
 			{
 				if (width > targetWidth)
 				{
-					int* seam = createSeam(width);
 					seam = findMinVerticalSeam(image, width, height);
 					removeVerticalSeam(image, width, height, seam);
 					width--;
-					deleteSeam(seam);
 				}
 				if (height > targetHeight)
 				{
-					int* seam = createSeam(height);
 					seam = findMinHorizontalSeam(image, width, height);
 					removeHorizontalSeam(image, width, height, seam);
 					height--;
-					deleteSeam(seam);
 				}
-				
 			}
+			deleteSeam(seam);
+
 			// set up output filename
 			stringstream ss;
 			ss << "carved" << width << "X" << height << "." << filename;
